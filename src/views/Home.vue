@@ -1,4 +1,3 @@
-<!-- src/views/Home.vue -->
 <template>
   <div class="home">
     <h1>Головна сторінка</h1>
@@ -9,6 +8,7 @@
       <h2>Популярні товари</h2>
       <div class="product-list">
         <div class="product-card" v-for="product in products" :key="product.id">
+          <img :src="product.image" :alt="product.name" class="product-image" />
           <h3>{{ product.name }}</h3>
           <p>{{ product.description }}</p>
           <button @click="addToCart(product)">Додати в кошик</button>
@@ -25,16 +25,32 @@ interface Product {
   id: number;
   name: string;
   description: string;
+  image: string;
 }
 
 export default {
   name: 'Home',
   setup() {
-    // Список популярних товарів
+    // Список популярних товарів з зображеннями
     const products = ref<Product[]>([
-      { id: 1, name: 'Товар 1', description: 'Опис товару 1' },
-      { id: 2, name: 'Товар 2', description: 'Опис товару 2' },
-      { id: 3, name: 'Товар 3', description: 'Опис товару 3' },
+      {
+        id: 1,
+        name: 'Худі “Angel”',
+        description: 'Завжди бути в тренді та ефектно виділитися з одноманітного сірого натовпу!',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDNYdIXWNvaydVALlxJMZZ_fdbwxBzZrYk0w&s',
+      },
+      {
+        id: 2,
+        name: 'Джинси Revolver',
+        description: 'Наймодніші та трендовіші в цьому сезоні широкі джинси баггі.',
+        image: 'https://content.rozetka.com.ua/goods/images/big/418152440.jpg',
+      },
+      {
+        id: 3,
+        name: 'Чоловіча футболка "Salo Chasnyk Tsybulia"',
+        description: 'Футболка з принтом "Salo Chasnyk Tsybulia", Український тренд.',
+        image: 'https://images.prom.ua/4528471203_w600_h600_4528471203.jpg',
+      },
     ]);
 
     // Функція додавання товару в кошик
@@ -49,6 +65,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 .home {
@@ -73,6 +90,15 @@ export default {
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+.product-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+
 
 .product-card h3 {
   font-size: 1.2rem;
