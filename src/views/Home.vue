@@ -25,15 +25,18 @@
           <p>{{ product.description }}</p>
           <p><strong>Ціна:</strong> {{ product.price }} грн</p>
           <p><strong>Розмір:</strong> {{ product.size }}</p>
-          <button @click="addToCart(product)">Додати в кошик</button>
+          <div class="product-buttons">
+            <button @click="addToCart(product)" class="btn btn-add-to-cart">Додати в кошик</button>
+            <button @click="addToFavorites(product)" class="btn btn-add-to-favorites">Додати в улюблені</button>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Пагінація -->
     <div class="pagination">
-      <button @click="changePage(currentPage - 1)" :disabled="currentPage <= 1">Попередня</button>
-      <button @click="changePage(currentPage + 1)">Наступна</button>
+      <button @click="changePage(currentPage - 1)" :disabled="currentPage <= 1" class="btn btn-pagination">Попередня</button>
+      <button @click="changePage(currentPage + 1)" class="btn btn-pagination">Наступна</button>
     </div>
   </div>
 </template>
@@ -113,10 +116,10 @@ export default {
       }
 
       if (filters.value.minPrice !== null && filters.value.minPrice !== undefined) {
-      filtered = filtered.filter((product) => product.price >= filters.value.minPrice);
+        filtered = filtered.filter((product) => product.price >= filters.value.minPrice);
       }
 
-       if (filters.value.maxPrice !== null && filters.value.maxPrice !== undefined) {
+      if (filters.value.maxPrice !== null && filters.value.maxPrice !== undefined) {
         filtered = filtered.filter((product) => product.price <= filters.value.maxPrice);
       }
 
@@ -168,10 +171,27 @@ export default {
 <style scoped>
 .home {
   padding: 20px;
+  font-family: 'Arial', sans-serif;
 }
 
 .filters {
   margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.filters input,
+.filters select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.filters input:focus,
+.filters select:focus {
+  outline: none;
+  border-color: #4CAF50;
 }
 
 .products {
@@ -182,51 +202,96 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
 }
 
 .product-card {
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 8px;
-  width: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 280px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
 .product-image {
   width: 100%;
-  height: 150px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 4px;
-  margin-bottom: 10px;
 }
 
 .product-card h3 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
 }
 
 .product-card p {
-  color: #555;
+  color: #777;
   font-size: 0.9rem;
 }
 
-.product-card button {
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.product-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
 }
 
-.product-card button:hover {
+.product-buttons .btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.product-buttons .btn:hover {
+  transform: scale(1.05);
+}
+
+.btn-add-to-cart {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-add-to-cart:hover {
   background-color: #45a049;
 }
 
+.btn-add-to-favorites {
+  background-color: #ff4081;
+  color: white;
+}
+
+.btn-add-to-favorites:hover {
+  background-color: #e73370;
+}
+
 .pagination {
-  margin-top: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.btn-pagination {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-pagination:hover {
+  background-color: #0056b3;
 }
 </style>
