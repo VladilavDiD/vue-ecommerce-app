@@ -11,6 +11,8 @@
           <img :src="product.image" :alt="product.name" class="product-image" />
           <h3>{{ product.name }}</h3>
           <p>{{ product.description }}</p>
+          <p><strong>Ціна:</strong> {{ product.price }} грн</p>
+          <p><strong>Розмір:</strong> {{ product.size }}</p>
           <button @click="addToCart(product)">Додати в кошик</button>
         </div>
       </div>
@@ -20,42 +22,53 @@
 
 <script lang="ts">
 import { ref } from 'vue';
+import { useCartStore } from '../stores/cart'; // Використовуємо Pinia
 
 interface Product {
   id: number;
   name: string;
   description: string;
   image: string;
+  price: number;
+  size: string;
 }
 
 export default {
   name: 'Home',
   setup() {
-    // Список популярних товарів з зображеннями
+    const cartStore = useCartStore(); // Імпортуємо магазин для кошика
+
+    // Список популярних товарів
     const products = ref<Product[]>([
       {
         id: 1,
         name: 'Худі “Angel”',
         description: 'Завжди бути в тренді та ефектно виділитися з одноманітного сірого натовпу!',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDNYdIXWNvaydVALlxJMZZ_fdbwxBzZrYk0w&s',
+        price: 800,
+        size: 'M',
       },
       {
         id: 2,
         name: 'Джинси Revolver',
         description: 'Наймодніші та трендовіші в цьому сезоні широкі джинси баггі.',
         image: 'https://content.rozetka.com.ua/goods/images/big/418152440.jpg',
+        price: 1200,
+        size: 'L',
       },
       {
         id: 3,
         name: 'Чоловіча футболка "Salo Chasnyk Tsybulia"',
         description: 'Футболка з принтом "Salo Chasnyk Tsybulia", Український тренд.',
         image: 'https://images.prom.ua/4528471203_w600_h600_4528471203.jpg',
+        price: 500,
+        size: 'S',
       },
     ]);
 
-    // Функція додавання товару в кошик
+    // Додати товар у кошик
     const addToCart = (product: Product) => {
-      console.log(`${product.name} додано в кошик`);
+      cartStore.addToCart(product); // Виклик функції магазину
     };
 
     return {
