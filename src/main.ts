@@ -1,11 +1,9 @@
-import './assets/main.css'
+// src/main.ts
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router/router'; // Імпортуємо роутер
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import App from './App.vue'
+const app = createApp(App);
 
-const app = createApp(App)
-
-app.use(createPinia())
-
-app.mount('#app')
+app.use(router);  // Використовуємо роутер
+app.mount('#app');  // Монтуємо додаток
