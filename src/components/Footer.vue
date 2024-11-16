@@ -1,14 +1,12 @@
 <template>
   <footer class="footer">
     <div class="contact-info">
-      <p>Контакти: info@vvclothes.com</p>
-      <p>Телефон: +380123456789</p>
-      <p>Адреса: Київ, Україна</p>
-    </div>
-    <div class="social-links">
-      <!-- Соціальні мережі -->
-      <a href="#">Facebook</a>
-      <a href="#">Instagram</a>
+      <p>Студенти:</p>
+    <ul>
+      <li><a href="https://github.com/VladilavDiD">Дідик Владислав Сергійович</a></li>
+      <li><a href="https://github.com/Vadim1108nds">Доля Вадим Павлович</a></li>
+      <li><a href="https://github.com/illiadumanskii">Думанський Ілля Андрійович</a></li>
+    </ul>
     </div>
   </footer>
 </template>
