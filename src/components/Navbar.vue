@@ -8,8 +8,8 @@
     <nav>
       <ul>
         <li><router-link to="/">Головна</router-link></li>
-        <li><router-link to="/about-us">Про нас</router-link></li>
-        <li><router-link to="/clothing">Одяг</router-link></li>
+        <li><router-link to="/favorites">Улюблений</router-link></li>
+        <li><router-link to="/:catchAll(.*)">404</router-link></li>
         <li><router-link to="/cart">Корзина</router-link></li>
       </ul>
     </nav>
